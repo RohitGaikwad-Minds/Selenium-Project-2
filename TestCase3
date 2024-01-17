@@ -1,1 +1,45 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoginUser {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://www.saucedemo.com/");
+
+        // Find the 'Username' input field and enter an incorrect username
+        WebElement usernameInput = driver.findElement(By.id("user-name"));
+        usernameInput.sendKeys("invalid_user");
+
+        // Find the 'Password' input field and enter an incorrect password
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        passwordInput.sendKeys("incorrect_password");
+
+        // Find the 'Login' button and click it
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        // Wait for an error message to be displayed
+        // You can add explicit waits here if needed
+
+        // Check if an error message is displayed
+        WebElement errorMessage = driver.findElement(By.cssSelector(".error-message"));
+        if (errorMessage.isDisplayed()) {
+            System.out.println("Login failed. Invalid credentials.");
+        } else {
+            System.out.println("Login successful.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
 
