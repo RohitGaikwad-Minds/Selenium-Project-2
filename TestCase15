@@ -1,1 +1,51 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RemoveProductsFromCart {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the inventory page
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+
+        // Find the 'Add to cart' button for the products you want to purchase
+        WebElement addToCartButton1 = driver.findElement(By.cssSelector(".inventory_item:nth-child(1) .btn_inventory"));
+        WebElement addToCartButton2 = driver.findElement(By.cssSelector(".inventory_item:nth-child(2) .btn_inventory"));
+
+        // Click on the 'Add to cart' buttons
+        addToCartButton1.click();
+        addToCartButton2.click();
+
+        // Find the shopping cart icon and click on it
+        WebElement cartIcon = driver.findElement(By.cssSelector(".shopping_cart_link"));
+        cartIcon.click();
+
+        // Find the remove buttons for the products in the cart
+        WebElement removeButton1 = driver.findElement(By.cssSelector(".cart_item:nth-child(1) .btn_secondary"));
+        WebElement removeButton2 = driver.findElement(By.cssSelector(".cart_item:nth-child(2) .btn_secondary"));
+
+        // Click on the remove buttons to remove the products from the cart
+        removeButton1.click();
+        removeButton2.click();
+
+        // Verify that the products are removed from the cart
+        boolean isCartEmpty = driver.findElement(By.cssSelector(".shopping_cart_badge")).getText().isEmpty();
+        if (isCartEmpty) {
+            System.out.println("Products successfully removed from the cart!");
+        } else {
+            System.out.println("Failed to remove products from the cart.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
 
