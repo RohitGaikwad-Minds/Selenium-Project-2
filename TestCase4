@@ -1,1 +1,41 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LogoutUser {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+
+        // Find the 'Menu' button and click it
+        WebElement menuButton = driver.findElement(By.cssSelector(".bm-burger-button"));
+        menuButton.click();
+
+        // Find the 'Logout' link and click it
+        WebElement logoutLink = driver.findElement(By.id("logout_sidebar_link"));
+        logoutLink.click();
+
+        // Wait for the next page to load
+        // You can add explicit waits here if needed
+
+        // Check if the user is logged out by verifying the current URL
+        String currentUrl = driver.getCurrentUrl();
+        if (currentUrl.equals("https://www.saucedemo.com/")) {
+            System.out.println("Logout successful.");
+        } else {
+            System.out.println("Logout failed.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
 
