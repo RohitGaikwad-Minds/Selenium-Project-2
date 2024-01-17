@@ -1,1 +1,66 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class PlaceOrderWithRegistration {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the inventory page
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+
+        // Find the 'Add to cart' button for the product you want to purchase
+        WebElement addToCartButton = driver.findElement(By.cssSelector(".inventory_item:nth-child(1) .btn_inventory"));
+
+        // Click on the 'Add to cart' button
+        addToCartButton.click();
+
+        // Find the shopping cart icon and click on it
+        WebElement cartIcon = driver.findElement(By.cssSelector(".shopping_cart_link"));
+        cartIcon.click();
+
+        // Find the 'Checkout' button and click on it
+        WebElement checkoutButton = driver.findElement(By.cssSelector(".checkout_button"));
+        checkoutButton.click();
+
+        // Find the 'Continue' button and click on it
+        WebElement continueButton = driver.findElement(By.cssSelector(".cart_button"));
+        continueButton.click();
+
+        // Find the input fields for the customer information
+        WebElement firstNameInput = driver.findElement(By.id("first-name"));
+        WebElement lastNameInput = driver.findElement(By.id("last-name"));
+        WebElement zipCodeInput = driver.findElement(By.id("postal-code"));
+
+        // Enter the customer information
+        firstNameInput.sendKeys("John");
+        lastNameInput.sendKeys("Doe");
+        zipCodeInput.sendKeys("12345");
+
+        // Find the 'Continue' button and click on it
+        continueButton = driver.findElement(By.cssSelector(".cart_button"));
+        continueButton.click();
+
+        // Find the 'Finish' button and click on it
+        WebElement finishButton = driver.findElement(By.cssSelector(".cart_button"));
+        finishButton.click();
+
+        // Verify the order completion
+        WebElement orderCompleteMessage = driver.findElement(By.cssSelector(".complete-header"));
+        if (orderCompleteMessage.isDisplayed()) {
+            System.out.println("Order placed successfully!");
+        } else {
+            System.out.println("Failed to place the order.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
 
