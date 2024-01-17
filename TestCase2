@@ -1,1 +1,39 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
+public class LoginUser {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://www.saucedemo.com/");
+
+        // Find the 'Username' input field and enter a valid username
+        WebElement usernameInput = driver.findElement(By.id("user-name"));
+        usernameInput.sendKeys("standard_user");
+
+        // Find the 'Password' input field and enter a valid password
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        passwordInput.sendKeys("secret_sauce");
+
+        // Find the 'Login' button and click it
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        // Wait for the next page to load
+        // You can add explicit waits here if needed
+
+        // Perform actions on the logged-in page
+        // For example, you can find elements and interact with them
+
+        // Close the browser
+        driver.quit();
+    }
+}
