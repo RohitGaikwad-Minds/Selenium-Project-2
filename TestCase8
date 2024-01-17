@@ -1,1 +1,54 @@
+java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
+
+public class FilterProducts {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the inventory page
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+
+        // Find the 'Sort' dropdown
+        WebElement sortDropdown = driver.findElement(By.cssSelector(".product_sort_container"));
+
+        // Create a Select object for the 'Sort' dropdown
+        Select sortSelect = new Select(sortDropdown);
+
+        // Select the 'Name (A to Z)' option
+        sortSelect.selectByValue("az");
+
+        // Wait for the page to reload and the products to be sorted
+        // You can add explicit waits here if needed
+
+        // Get all the product elements
+        List<WebElement> productElements = driver.findElements(By.cssSelector(".inventory_item"));
+
+        // Print the sorted products
+        for (WebElement productElement : productElements) {
+            // Get the product name
+            WebElement productNameElement = productElement.findElement(By.cssSelector(".inventory_item_name"));
+            String productName = productNameElement.getText();
+
+            // Get the product price
+            WebElement productPriceElement = productElement.findElement(By.cssSelector(".inventory_item_price"));
+            String productPrice = productPriceElement.getText();
+
+            // Print the product name and price
+            System.out.println("Product: " + productName + ", Price: " + productPrice);
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
 
